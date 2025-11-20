@@ -3,10 +3,12 @@ import Banner from "../Components/Banner";
 import useAppsData from "../Hooks/useAppsData";
 import Card from "../Components/Card";
 import { RingLoader } from "react-spinners";
+import { Link } from "react-router";
 
 const Home = () => {
   const { data, loading, error } = useAppsData();
-  console.log(data);
+
+  const homeAppSuggestion = data.slice(0, 8);
 
   return (
     <div className="space-y-14">
@@ -17,12 +19,21 @@ const Home = () => {
           Explore All Apps on the Market developed by us
         </p>
       </div>
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-6">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-6">
         {loading ? (
           <RingLoader></RingLoader>
         ) : (
-          data.map((data) => <Card key={data.id} data={data}></Card>)
+          homeAppSuggestion.map((data) => (
+            <Card key={data.id} data={data}></Card>
+          ))
         )}
+      </div>
+      <div className="flex justify-center">
+        <Link to="/apps">
+          <button className="bg-purple-600 text-white py-3 px-5 rounded font-bold">
+            Show All
+          </button>
+        </Link>
       </div>
     </div>
   );

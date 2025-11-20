@@ -4,11 +4,11 @@ import { IoMdDownload } from "react-icons/io";
 
 const Card = ({ data }) => {
   return (
-    <div className="card bg-base-100 shadow">
+    <div className="card bg-base-100 p-4 shadow-2xl">
       <img
         src={data.image}
         alt={data.title}
-        className="rounded-xl m-3 w-full"
+        className="rounded-xl m-3 shadow"
       />
 
       <div className="card-body">

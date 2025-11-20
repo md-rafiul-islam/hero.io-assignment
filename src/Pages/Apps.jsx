@@ -15,7 +15,6 @@ const Apps = () => {
       .toLocaleLowerCase()
       .includes(text.trim().toLocaleLowerCase())
   );
-  console.log(searchData);
 
   return (
     <div className="space-y-14 mt-7">
@@ -26,7 +25,7 @@ const Apps = () => {
         </p>
       </div>
 
-      <div className="flex w-screen justify-between items-center">
+      <div className="flex sm:flex-col md:flex-row lg:flex-row w-[calc(100%-5%)] mx-auto justify-between items-center">
         <h1 className="text-2xl font-semibold">
           ({searchData.length}) Apps Found
         </h1>

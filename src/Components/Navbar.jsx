@@ -109,7 +109,10 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link className="flex items-center gap-1 bg-linear-to-r from-purple-600 to-purple-400 p-1.5 rounded text-white font-bold">
+        <Link
+          to="https://github.com/md-rafiul-islam"
+          className="flex items-center gap-1 bg-linear-to-r from-purple-600 to-purple-400 p-1.5 rounded text-white font-bold"
+        >
           <IoLogoGithub></IoLogoGithub>
           Contribute
         </Link>

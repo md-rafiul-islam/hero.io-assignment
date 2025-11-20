@@ -40,7 +40,9 @@ const Banner = () => {
       </div>
 
       <div className="flex flex-col gap-7 text-center text-white  py-12 bg-linear-to-r from-purple-700 via-purple-500 to-purple-600 ">
-        <h className="text-4xl font-bold">Trusted By Millions, Built For You</h>
+        <h1 className="text-4xl font-bold">
+          Trusted By Millions, Built For You
+        </h1>
         <div className="flex sm:flex-col md:flex-row lg:flex:row justify-center items-center gap-10 ">
           <div className="flex flex-col gap-2">
             <p className="text-sm text-gray-200">Total Downloads</p>

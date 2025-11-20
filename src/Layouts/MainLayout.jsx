@@ -3,11 +3,11 @@ import { Outlet } from "react-router";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 
-const MainLayouts = () => {
+const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar></Navbar>
-      <main className="flex-1">
+      <main className="flex-1 mx-auto ">
         <Outlet></Outlet>
       </main>
 
@@ -16,4 +16,4 @@ const MainLayouts = () => {
   );
 };
 
-export default MainLayouts;
+export default MainLayout;

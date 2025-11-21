@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useAppsData from "../Hooks/useAppsData";
 import { RingLoader } from "react-spinners";
 import Card from "../Components/Card";

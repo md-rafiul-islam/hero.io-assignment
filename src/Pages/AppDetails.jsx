@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router";
 import useAppsData from "../Hooks/useAppsData";
 import { RingLoader } from "react-spinners";
@@ -15,12 +15,30 @@ import {
 
 const AppDetails = () => {
   const { id } = useParams();
-
   const { data, loading, error } = useAppsData();
+  const [isClicked, setIsClicked] = useState(false);
 
   let thisAppDetails = {};
   thisAppDetails = data.find((data) => data.id == id);
-  console.log(thisAppDetails);
+  // console.log(thisAppDetails);
+
+  const setInLocalStorage = () => {
+    let preSaveData = JSON.parse(localStorage.getItem("installedApps"));
+    console.log(preSaveData);
+    let updateData = [];
+    if (preSaveData) {
+      let ifExist = preSaveData.some((id) => id == thisAppDetails.id);
+      if (ifExist) {
+        setIsClicked(true);
+        return;
+      }
+      updateData = [...preSaveData, thisAppDetails.id];
+    } else {
+      updateData.push(thisAppDetails.id);
+    }
+    let finalData = JSON.stringify(updateData);
+    localStorage.setItem("installedApps", finalData);
+  };
 
   if (loading) {
     return <RingLoader></RingLoader>;
@@ -37,9 +55,17 @@ const AppDetails = () => {
               Developed by{" "}
               <span className="font-bold">{thisAppDetails.companyName}</span>
             </p>
+
             <div className="card-actions ">
-              <button className="btn btn-success text-white font-bold">
-                Install Now ({thisAppDetails.size} MB)
+              <button
+                onClick={() => {
+                  setInLocalStorage();
+                }}
+                className="btn btn-success text-white font-bold"
+                disabled={isClicked}
+              >
+                {isClicked ? "Installed" : "Install Now"} ({thisAppDetails.size}{" "}
+                MB)
               </button>
             </div>
           </div>

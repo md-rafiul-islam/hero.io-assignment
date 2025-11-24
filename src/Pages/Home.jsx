@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import Spinner from "../Components/Spinner";
 
 const Home = () => {
-  const { data, loading, error } = useAppsData();
+  const { data, loading } = useAppsData();
 
   const homeAppSuggestion = data.slice(0, 8);
 

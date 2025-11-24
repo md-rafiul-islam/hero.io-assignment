@@ -3,9 +3,10 @@ import useAppsData from "../Hooks/useAppsData";
 import { RingLoader } from "react-spinners";
 import Card from "../Components/Card";
 import Spinner from "../Components/Spinner";
+import { Link } from "react-router";
 
 const Apps = () => {
-  const { data, loading, error } = useAppsData();
+  const { data, loading } = useAppsData();
   const [text, setText] = useState("");
 
   let searchData = {};
@@ -16,6 +17,8 @@ const Apps = () => {
       .toLocaleLowerCase()
       .includes(text.trim().toLocaleLowerCase())
   );
+
+  console.log(searchData);
   if (loading) {
     return <Spinner></Spinner>;
   }
@@ -61,11 +64,17 @@ const Apps = () => {
       </div>
 
       <div>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-6 p-5">
-          {searchData.map((data) => (
-            <Card key={data.id} data={data}></Card>
-          ))}
-        </div>
+        {searchData.length == 0 ? (
+          <div className="flex flex-col space-y-3">
+            <h1 className="text-center font-bold ">No Apps Found!</h1>
+          </div>
+        ) : (
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-6 p-5">
+            {searchData.map((data) => (
+              <Card key={data.id} data={data}></Card>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

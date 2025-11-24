@@ -11,22 +11,29 @@ import {
   YAxis,
 } from "recharts";
 import Spinner from "../Components/Spinner";
+import ErrorApp from "./ErrorApp";
+import { toast } from "react-toastify";
 
 const AppDetails = () => {
   const { id } = useParams();
-  const { data, loading, error } = useAppsData();
+
+  const { data, loading } = useAppsData();
+
   const [isClicked, setIsClicked] = useState(false);
 
   let thisAppDetails = {};
   thisAppDetails = data.find((data) => data.id == id);
 
   useEffect(() => {
-    if (!thisAppDetails) return;
+    if (!thisAppDetails) {
+      return;
+    }
     const preSaveData = JSON.parse(localStorage.getItem("installedApps")) || [];
+
     if (preSaveData.includes(thisAppDetails.id)) {
       setIsClicked(true);
     }
-  }, [thisAppDetails]);
+  }, [data, thisAppDetails]);
 
   const setInLocalStorage = () => {
     let preSaveData = JSON.parse(localStorage.getItem("installedApps"));
@@ -66,19 +73,22 @@ const AppDetails = () => {
 
           <div className="card-actions">
             <button
-              onClick={setInLocalStorage}
+              onClick={() => {
+                toast(`${thisAppDetails.title} Installed Successfuly`);
+                setInLocalStorage();
+              }}
               className="btn btn-success text-white font-bold"
               disabled={isClicked}
             >
-              {isClicked ? "Installed" : "Install Now"} ({thisAppDetails.size}{" "}
-              MB)
+              {isClicked ? "Already Installed" : "Install Now"} (
+              {thisAppDetails.size} MB)
             </button>
           </div>
         </div>
       </div>
 
       <p className="w-[calc(100%-5%)] mx-auto font-bold text-2xl">Ratings:</p>
-      <div className="bg-base-100 p-4 h-82 w-[calc(100%-5%)] mx-auto">
+      <div className="bg-base-100 p-4 h-64 w-[calc(100%-5%)] mx-auto">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={thisAppDetails.ratings}>
             <XAxis dataKey="name" />

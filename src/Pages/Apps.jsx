@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useAppsData from "../Hooks/useAppsData";
 import { RingLoader } from "react-spinners";
 import Card from "../Components/Card";
+import Spinner from "../Components/Spinner";
 
 const Apps = () => {
   const { data, loading, error } = useAppsData();
@@ -15,7 +16,9 @@ const Apps = () => {
       .toLocaleLowerCase()
       .includes(text.trim().toLocaleLowerCase())
   );
-
+  if (loading) {
+    return <Spinner></Spinner>;
+  }
   return (
     <div className="space-y-14 mt-7">
       <div className="text-center space-y-3">
@@ -59,11 +62,9 @@ const Apps = () => {
 
       <div>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-6 p-5">
-          {loading ? (
-            <RingLoader></RingLoader>
-          ) : (
-            searchData.map((data) => <Card key={data.id} data={data}></Card>)
-          )}
+          {searchData.map((data) => (
+            <Card key={data.id} data={data}></Card>
+          ))}
         </div>
       </div>
     </div>

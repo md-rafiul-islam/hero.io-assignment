@@ -2,8 +2,8 @@ import React from "react";
 import Banner from "../Components/Banner";
 import useAppsData from "../Hooks/useAppsData";
 import Card from "../Components/Card";
-import { RingLoader } from "react-spinners";
 import { Link } from "react-router";
+import Spinner from "../Components/Spinner";
 
 const Home = () => {
   const { data, loading, error } = useAppsData();
@@ -21,7 +21,7 @@ const Home = () => {
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-6">
         {loading ? (
-          <RingLoader></RingLoader>
+          <Spinner></Spinner>
         ) : (
           homeAppSuggestion.map((data) => (
             <Card key={data.id} data={data}></Card>
